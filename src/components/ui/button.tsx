@@ -15,6 +15,13 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // Healthcare variants
+        medical: "bg-gradient-primary text-white hover:shadow-medical transform hover:scale-105 transition-all duration-300",
+        healthcare: "bg-gradient-healthcare text-white hover:shadow-float transform hover:scale-105 transition-all duration-300",
+        trust: "bg-trust-blue text-white hover:bg-trust-blue/90 shadow-soft",
+        success: "bg-success-green text-white hover:bg-success-green/90",
+        warning: "bg-warning-orange text-white hover:bg-warning-orange/90",
+        chat: "bg-chat-sent text-white hover:bg-chat-sent/90 rounded-2xl",
       },
       size: {
         default: "h-10 px-4 py-2",

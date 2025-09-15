@@ -57,6 +57,39 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Healthcare specific colors
+        medical: {
+          blue: "hsl(var(--medical-blue))",
+          green: "hsl(var(--medical-green))",
+        },
+        trust: {
+          blue: "hsl(var(--trust-blue))",
+        },
+        success: {
+          green: "hsl(var(--success-green))",
+        },
+        warning: {
+          orange: "hsl(var(--warning-orange))",
+        },
+        chat: {
+          bubble: "hsl(var(--chat-bubble))",
+          sent: "hsl(var(--chat-sent))",
+        },
+      },
+      backgroundImage: {
+        "gradient-primary": "var(--gradient-primary)",
+        "gradient-healthcare": "var(--gradient-healthcare)",
+        "gradient-trust": "var(--gradient-trust)",
+        "gradient-chat": "var(--gradient-chat)",
+      },
+      boxShadow: {
+        "soft": "var(--shadow-soft)",
+        "medical": "var(--shadow-medical)",
+        "float": "var(--shadow-float)",
+      },
+      transitionTimingFunction: {
+        "smooth": "var(--transition-smooth)",
+        "bounce": "var(--transition-bounce)",
       },
       borderRadius: {
         lg: "var(--radius)",
