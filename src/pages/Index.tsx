@@ -5,39 +5,42 @@ import LanguageSelector from '@/components/LanguageSelector';
 import ChatInterface from '@/components/ChatInterface';
 import { MessageCircle, Users, Shield, Globe, Heart, Stethoscope, Phone, AlertCircle } from 'lucide-react';
 import heroImage from '@/assets/hero-healthcare.jpg';
+import { translations } from '@/translations';
 
 const Index = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [showChat, setShowChat] = useState(false);
+  
+  const t = translations[selectedLanguage as keyof typeof translations] || translations.en;
 
   const features = [
     {
       icon: MessageCircle,
-      title: 'Multilingual Support',
-      description: 'Communicate in Hindi, English, and 15+ regional languages with accurate medical translations'
+      title: t.multilingualSupport,
+      description: t.multilingualDescription
     },
     {
       icon: Stethoscope,
-      title: 'Expert Health Guidance',
-      description: 'Get reliable information about symptoms, medications, and preventive healthcare'
+      title: t.expertHealthGuidance,
+      description: t.expertDescription
     },
     {
       icon: Shield,
-      title: 'Vaccination Schedules',
-      description: 'Stay updated with government-recommended vaccination schedules and nearby centers'
+      title: t.vaccinationSchedules,
+      description: t.vaccinationDescription
     },
     {
       icon: AlertCircle,
-      title: 'Real-time Alerts',
-      description: 'Receive important health alerts and outbreak notifications for your area'
+      title: t.realTimeAlerts,
+      description: t.alertsDescription
     }
   ];
 
   const stats = [
-    { number: '80%', label: 'Query Accuracy' },
-    { number: '15+', label: 'Languages Supported' },
-    { number: '24/7', label: 'Always Available' },
-    { number: '100K+', label: 'Communities Served' }
+    { number: '80%', label: t.queryAccuracy },
+    { number: '15+', label: t.languagesSupported },
+    { number: '24/7', label: t.alwaysAvailable },
+    { number: '100K+', label: t.communitiesServed }
   ];
 
   if (showChat) {
@@ -51,7 +54,7 @@ const Index = () => {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-foreground">Sensily</h1>
-                <p className="text-muted-foreground">Healthcare Assistant</p>
+                <p className="text-muted-foreground">{t.healthcareAssistant}</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -60,7 +63,7 @@ const Index = () => {
                 onLanguageChange={setSelectedLanguage}
               />
               <Button variant="outline" onClick={() => setShowChat(false)}>
-                Back to Home
+                {t.backToHome}
               </Button>
             </div>
           </div>
@@ -81,7 +84,7 @@ const Index = () => {
             </div>
             <div>
               <h1 className="text-2xl font-bold text-foreground">Sensily</h1>
-              <p className="text-muted-foreground text-sm">Healthcare for Everyone</p>
+              <p className="text-muted-foreground text-sm">{t.healthcareForEveryone}</p>
             </div>
           </div>
           <LanguageSelector 
@@ -97,15 +100,14 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-                Healthcare
+                {t.healthcare}
                 <br />
                 <span className="bg-gradient-healthcare bg-clip-text text-transparent">
-                  In Your Language
+                  {t.inYourLanguage}
                 </span>
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
-                Get instant, accurate health guidance in your local language. From symptoms to vaccination schedules, 
-                Sensily brings quality healthcare information to rural and urban communities across India.
+                {t.heroDescription}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button 
@@ -115,7 +117,7 @@ const Index = () => {
                   className="text-lg px-8 py-6"
                 >
                   <MessageCircle className="h-5 w-5 mr-2" />
-                  Start Chatting
+                  {t.startChatting}
                 </Button>
                 <Button 
                   variant="outline" 
@@ -123,7 +125,7 @@ const Index = () => {
                   className="text-lg px-8 py-6"
                 >
                   <Phone className="h-5 w-5 mr-2" />
-                  WhatsApp Support
+                  {t.whatsappSupport}
                 </Button>
               </div>
             </div>
@@ -158,10 +160,10 @@ const Index = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Healthcare Made <span className="text-primary">Accessible</span>
+              {t.healthcareMadeAccessible.split(' ').slice(0, 2).join(' ')} <span className="text-primary">{t.healthcareMadeAccessible.split(' ').slice(2).join(' ')}</span>
             </h3>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Breaking language barriers to deliver quality healthcare information to every community
+              {t.breakingLanguageBarriers}
             </p>
           </div>
           
@@ -184,10 +186,10 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center">
           <Card className="p-8 md:p-12 bg-gradient-healthcare text-white shadow-float">
             <h3 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Get Started?
+              {t.readyToGetStarted}
             </h3>
             <p className="text-lg mb-8 opacity-90">
-              Join thousands of families who trust Sensily for their healthcare needs
+              {t.joinThousands}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
@@ -197,7 +199,7 @@ const Index = () => {
                 className="text-lg px-8 py-6"
               >
                 <MessageCircle className="h-5 w-5 mr-2" />
-                Try Now - It's Free
+                {t.tryNowFree}
               </Button>
               <Button 
                 variant="outline"
@@ -205,7 +207,7 @@ const Index = () => {
                 className="text-lg px-8 py-6 border-white text-white hover:bg-white hover:text-primary"
               >
                 <Globe className="h-5 w-5 mr-2" />
-                Learn More
+                {t.learnMore}
               </Button>
             </div>
           </Card>
@@ -222,7 +224,7 @@ const Index = () => {
             <span className="text-xl font-bold text-foreground">Sensily</span>
           </div>
           <p className="text-muted-foreground">
-            Empowering communities with accessible healthcare information
+            {t.empoweringCommunities}
           </p>
         </div>
       </footer>

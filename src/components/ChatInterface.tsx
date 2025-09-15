@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { Send, Bot, User, Heart, Shield, Calendar, AlertTriangle } from 'lucide-react';
+import VoiceAssistant from './VoiceAssistant';
+import { translations as uiTranslations } from '@/translations';
 
 interface Message {
   id: string;
@@ -48,14 +50,15 @@ const translations: Record<string, Record<string, string>> = {
   }
 };
 
-const quickActions = [
-  { icon: Heart, text: 'Common Symptoms', key: 'symptoms' },
-  { icon: Shield, text: 'Vaccination Schedule', key: 'vaccination' },
-  { icon: Calendar, text: 'Health Calendar', key: 'calendar' },
-  { icon: AlertTriangle, text: 'Emergency Info', key: 'emergency' },
+const getQuickActions = (t: any) => [
+  { icon: Heart, text: t.commonSymptoms, key: 'symptoms' },
+  { icon: Shield, text: t.vaccinationSchedule, key: 'vaccination' },
+  { icon: Calendar, text: t.healthCalendar, key: 'calendar' },
+  { icon: AlertTriangle, text: t.emergencyInfo, key: 'emergency' },
 ];
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedLanguage }) => {
+  const t = uiTranslations[selectedLanguage as keyof typeof uiTranslations] || uiTranslations.en;
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -146,6 +149,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedLanguage }) => {
     setInputText(quickMessages[action] || '');
   };
 
+  const handleVoiceMessage = (message: string) => {
+    setInputText(message);
+    // Auto-send voice messages
+    setTimeout(() => {
+      handleSendMessage();
+    }, 500);
+  };
+
   return (
     <Card className="flex flex-col h-[600px] max-w-2xl mx-auto shadow-float">
       {/* Chat Header */}
@@ -154,8 +165,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedLanguage }) => {
           <Bot className="h-6 w-6" />
         </div>
         <div>
-          <h3 className="font-semibold">Sensily Health Assistant</h3>
-          <p className="text-sm opacity-90">Always here to help with your health queries</p>
+          <h3 className="font-semibold">{t.healthcareAssistant}</h3>
+          <p className="text-sm opacity-90">{t.alwaysHereToHelp}</p>
         </div>
       </div>
 
@@ -213,8 +224,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedLanguage }) => {
 
       {/* Quick Actions */}
       <div className="p-4 border-t">
-        <div className="flex flex-wrap gap-2 mb-3">
-          {quickActions.map((action) => (
+        <VoiceAssistant 
+          selectedLanguage={selectedLanguage}
+          onVoiceMessage={handleVoiceMessage}
+        />
+        <div className="flex flex-wrap gap-2 mb-3 mt-3">
+          {getQuickActions(t).map((action) => (
             <Button
               key={action.key}
               variant="outline"
@@ -233,7 +248,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedLanguage }) => {
           <Input
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            placeholder="Ask about symptoms, medications, or health advice..."
+            placeholder={t.chatPlaceholder}
             onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
             className="flex-1"
           />
